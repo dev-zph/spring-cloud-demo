@@ -14,14 +14,9 @@ public class ConsumerController {
     @Autowired
     ComputeClient computeClient;
     
-    @HystrixCommand(fallbackMethod = "addServiceFallback")//加一个断路由，如果程序出错不会一直阻塞，调用一个出错时候的机制放啊
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public Integer add() {
         return computeClient.add(10, 20);
     }
     
-    public Integer addServiceFallback() {
-        return 102;
-    }
-
 }
